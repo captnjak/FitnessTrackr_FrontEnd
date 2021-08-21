@@ -1,0 +1,93 @@
+@import url('https://fonts.googleapis.com/css?family=Parisienne|Roboto|Playfair+Display|Roboto+Condensed&display=swap');
+
+* {
+	border: 0;
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+body {
+	height: 100vh;
+	background-image: linear-gradient(45deg, #874da2 0%, #c43a30 100%);
+}
+
+#app {
+	height: 100%;
+}
+
+
+.app {
+	display: grid;
+	grid-template-columns: 320px 1fr;
+	grid-template-rows: auto auto 1fr;
+	grid-gap: 8px;
+
+	height: 100%;
+	width: 100%;
+
+	overflow: hidden;
+
+	background-image: linear-gradient(45deg, #874da2 0%, #c43a30 100%);}
+
+
+button, form{
+	margin: 5px;
+}
+
+a {
+	margin: 3px;
+}
+
+.routineCard {
+	border: 2px solid black;
+	width: 800px;
+	padding: 5px;
+	margin: 5px;
+}
+
+.activityCard {
+	border: 2px solid black;
+	width: 500px;
+	padding: 5px;
+	margin: 5px;
+}
+
+header {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+
+	font-family: 'Balsamic Sans', sans-serif;
+	font-size: 16px;
+
+	padding: 1em;
+}
+
+header h1 {
+	font-size: 2.4em;
+	font-style: italic;
+	color: gray;
+	text-shadow: 1px 1px 3px black;
+}
+
+header .user-select {
+	display: flex;
+	flex-direction: row;
+}
+
+header .user-select select {
+	width: 16em;
+	margin-right: 0.5em;
+}
+
+header .user-select a {
+	padding: 8px 12px;
+	color: #333333;
+	font-weight: bold;
+	font-size: 1em;
+	color: #8ff;
+	background: #333333;
+	margin-right: 0.5em;
+}
