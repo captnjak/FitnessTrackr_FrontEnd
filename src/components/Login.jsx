@@ -24,7 +24,8 @@ const Login = ( {setUser} ) => {
 
 			setUser(res.data.user);
             storeCurrentUser(res.data.user, res.data.token)
-            alert('Welcome to Fitness Trackr, ', res.data.user)
+			alert('Welcome back to FitnessTrackr!')
+			window.location.assign('/myroutines')
 		} catch (error) {
 			console.error(error);
 		}
@@ -41,7 +42,7 @@ const Login = ( {setUser} ) => {
 				<input
 					name="password"
 					value={form.password}
-					onInput={handleInput}
+					onChange={handleInput}
 					type="password"
 				/>
 				<button type="submit">Login</button>

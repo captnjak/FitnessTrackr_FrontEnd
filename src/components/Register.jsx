@@ -23,6 +23,8 @@ const Register = ({ setUser }) => {
 
 			setUser(res.data.user);
             storeCurrentUser(res.data.user, res.data.token)
+			alert('Thanks for registering with FitnessTrackr!')
+			window.location.assign('/routines')
 		} catch (error) {
 			console.error(error);
 		}
@@ -39,7 +41,7 @@ const Register = ({ setUser }) => {
 				<input
 					name="password"
 					value={form.password}
-					onInput={handleInput}
+					onChange={handleInput}
 					type="password"
 				/>
 				<button type="submit">Register</button>

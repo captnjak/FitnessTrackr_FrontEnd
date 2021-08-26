@@ -2,7 +2,7 @@ import axios from 'axios';
 import { getCurrentToken } from '../auth';
 
 export const BASE_URL = 'https://ancient-garden-24060.herokuapp.com/api';
-// export const BASE_URL = 'localhost:3001/api'
+// export const BASE_URL = 'http://localhost:3001/api'
 
 export async function getRoutines() {
 	try {
@@ -25,7 +25,7 @@ export async function getRoutiensByUser() {
 export async function destroyRoutine(id) {
 	try {
 		const { data } = await axios.delete(`${BASE_URL}/routines/${id}`, {
-			headers: { Authorization: 'Bearer ' + getCurrentToken() },
+			headers: { 'Content-type': 'application/json', Authorization: 'Bearer ' + getCurrentToken() },
 		});
 		return data;
 	} catch (error) {
@@ -42,15 +42,16 @@ export async function getActivities() {
 	}
 }
 
-export async function patchRoutine(id, name, goal) {
+export async function patchRoutine(id) {
 	try {
 		const { data } = await axios.patch(
 			`${BASE_URL}/routines/${id}`,
 			{
-				name: '',
-				goal: '',
+				isPublic: true,
+				name: name,
+				goal: goal,
 			},
-			{ headers: { Authorization: 'Bearer ' + getCurrentToken() } }
+			{ headers: { 'Content-type': 'application/json', Authorization: 'Bearer ' + getCurrentToken() } }
 		);
 		return data;
 	} catch (error) {

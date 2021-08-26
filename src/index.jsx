@@ -34,7 +34,7 @@ const App = () => {
 				<Header setUser={setUser} user={user} />
 
 				<Switch>
-					<Route exact path="/" />
+					<Route exact path="/"> Please select a link above to navigate!</Route>
 					<Route path="/routines">
 						<Routines routines={routines} />
 					</Route>
@@ -48,7 +48,7 @@ const App = () => {
 						<CreateRoutine user={user} setRoutines={setRoutines} />
 					</Route>
 					<Route path="/patchroutine">
-						<PatchRoutine user={user} routines={routines}/>
+						<PatchRoutine routines={routines} activities={activities}/>
 					</Route>
 				</Switch>
 			</div>

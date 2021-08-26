@@ -3,7 +3,6 @@ import { Switch, Route, Link } from 'react-router-dom';
 import { Register, Login } from '../components';
 
 import { clearCurrentUser } from '../auth';
-import { getRoutines } from '../api';
 
 const Header = ({ setUser, user }) => {
 	const logout = () => {
@@ -18,6 +17,7 @@ const Header = ({ setUser, user }) => {
 			<nav>
 				{user ? (
 					<li>
+						<Link to='/'>Home</Link>
 						<Link to="/routines">Routines</Link>
 						<Link to="/myroutines" >My Routines</Link>
 						<Link to="/activities">Activities</Link>

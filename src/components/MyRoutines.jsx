@@ -1,12 +1,16 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { destroyRoutine } from '../api';
+import { destroyRoutine, getRoutines } from '../api';
 
-const myRoutines = ({ user, routines }) => {
-	
+const myRoutines = ({ user, routines, setRoutines }) => {
+
+
 	const handleDelete = async (e) => {
 		try {
 			await destroyRoutine(e.target.id);
+			
+			const routines = await getRoutines();
+			setRoutines(routines);
 		} catch (error) {
 			console.error(error);
 		}
@@ -25,8 +29,8 @@ const myRoutines = ({ user, routines }) => {
 				<div key={id} className="routineCard">
 					{user.username === creatorName && (
 						<>
-							<Link to='/patchroutine'>
-								<button type="button" id="editRoutine">
+							<Link to={`/patchroutine/${id}`}>
+								<button type="button" id={id}>
 									Edit Routine
 								</button>
 							</Link>

@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { getCurrentToken } from '../auth';
 import { BASE_URL, getRoutines } from '../api';
 
-const CreateRoutine = ({ user, setRoutines }) => {
+const CreateRoutine = ({ setRoutines }) => {
 	const [form, setForm] = useState({
 		isPublic: 'true',
 		name: '',
@@ -29,15 +30,21 @@ const CreateRoutine = ({ user, setRoutines }) => {
 					name: form.name,
 					goal: form.goal,
 				},
-				{ headers: { Authorization: 'Bearer ' + getCurrentToken() } }
+				{
+					headers: {
+						'Content-type': 'application/json',
+						Authorization: 'Bearer ' + getCurrentToken(),
+					},
+				}
 			);
 
 			const routines = await getRoutines();
-			setRoutines(routines)
-
+			setRoutines(routines);
+			alert('Routine created successfully!');
 			formReset();
+			window.location.assign('/myroutines');
 		} catch (error) {
-			alert('Error Creating Routine', error)
+			alert('Error Creating Routine', error);
 		}
 	};
 
@@ -46,16 +53,9 @@ const CreateRoutine = ({ user, setRoutines }) => {
 			<h1>Create New Routine</h1>
 
 			<form onSubmit={handleCreate}>
-				<label style={{ marginTop: '3px', padding: '3px' }}>Is Public?</label>
-				<input
-					style={{ marginTop: '3px', padding: '3px' }}
-					type="radio"
-					value='true'
-					name="isTrue"
-					defaultChecked
-				/>{' '}
-				<br></br>
-				<label style={{ marginTop: '3px', padding: '3px' }}>Name:</label>
+				<label style={{ marginTop: '3px', padding: '3px' }}>
+					Name:
+				</label>
 				<input
 					style={{ marginTop: '3px', padding: '3px' }}
 					required
@@ -64,7 +64,9 @@ const CreateRoutine = ({ user, setRoutines }) => {
 					onInput={handleInput}
 				/>{' '}
 				<br></br>
-				<label style={{ marginTop: '3px', padding: '3px' }}>Goal:</label>
+				<label style={{ marginTop: '3px', padding: '3px' }}>
+					Goal:
+				</label>
 				<input
 					style={{ marginTop: '3px', padding: '3px' }}
 					required
@@ -73,9 +75,21 @@ const CreateRoutine = ({ user, setRoutines }) => {
 					onInput={handleInput}
 				/>{' '}
 				<br></br>
-				<button style={{ marginTop: '3px', padding: '3px' }} type="submit">
+				<button
+					style={{ marginTop: '3px', padding: '3px' }}
+					type="submit"
+				>
 					Create Routine
 				</button>
+				<Link to="/myroutines">
+					<button
+						style={{ marginTop: '3px', padding: '3px' }}
+						type="button"
+						id="myroutines"
+					>
+						Cancel
+					</button>
+				</Link>
 			</form>
 		</div>
 	);

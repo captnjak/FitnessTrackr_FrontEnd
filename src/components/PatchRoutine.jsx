@@ -1,14 +1,18 @@
 import React, { useState } from 'react';
-import axios from 'axios';
-import { getCurrentToken } from '../auth';
-import { BASE_URL } from '../api';
+import { Link } from 'react-router-dom';
+import { getActivities, patchRoutine } from '../api';
 
-const PatchRoutine = ({ user }) => {
+const PatchRoutine = ({ routines, activities }) => {
 	const [form, setForm] = useState({
 		isPublic: '',
 		name: '',
 		goal: '',
 	});
+
+	const {rootName, rootGoal } = routines;
+
+	console.log('patch routines', routines);
+	console.log('patch activities', activities);
 
 	const formReset = () => {
 		setForm({ isPublic: '', name: '', goal: '' });
@@ -18,22 +22,16 @@ const PatchRoutine = ({ user }) => {
 		setForm({ ...form, [e.target.name]: e.target.value });
 	};
 
-	const handleCreate = async (e) => {
-		e.preventDefault();
+	const handlePatch = async (e) => {
 		try {
-			const res = await axios.post(
-				`${BASE_URL}/routines`,
-				{
-					isPublic: form.isPublic,
-					name: form.name,
-					goal: form.goal,
-				},
-				{ headers: { Authorization: 'Bearer ' + getCurrentToken() } }
-			);
+			await patchRoutine(e.target.id);
+			alert('Routine updated successfully');
+			setRoutines(routines);
 
 			formReset();
+			window.location.assign('/myroutines');
 		} catch (error) {
-			alert('Error Creating Routine', error)
+			console.error(error);
 		}
 	};
 
@@ -41,37 +39,51 @@ const PatchRoutine = ({ user }) => {
 		<div>
 			<h1>Edit Routine</h1>
 
-			<form onSubmit={handleCreate}>
-				<label style={{ marginTop: '3px', padding: '3px' }}>Is Public?</label>
+			<form onSubmit={handlePatch}>
+				<label style={{ marginTop: '3px', padding: '3px' }}>
+					Name:
+				</label>
 				<input
 					style={{ marginTop: '3px', padding: '3px' }}
-					type="radio"
-					value={form.isPublic}
-					name="isTrue"
-					defaultChecked
-				/>{' '}
-				<br></br>
-				<label style={{ marginTop: '3px', padding: '3px' }}>Name:</label>
-				<input
-					style={{ marginTop: '3px', padding: '3px' }}
+					name='name'
 					required
-					name="name"
 					value={form.name}
-					onInput={handleInput}
-				/>{' '}
+					onChange={handleInput}
+				/>
 				<br></br>
-				<label style={{ marginTop: '3px', padding: '3px' }}>Goal:</label>
+				<label style={{ marginTop: '3px', padding: '3px' }}>
+					Goal:
+				</label>
 				<input
 					style={{ marginTop: '3px', padding: '3px' }}
 					required
 					name="goal"
 					value={form.goal}
-					onInput={handleInput}
-				/>{' '}
+					onChange={handleInput}
+				/>
 				<br></br>
-				<button style={{ marginTop: '3px', padding: '3px' }} type="submit">
-					Create Routine
+				<label style={{ marginTop: '3px', padding: '3px' }}>
+					Activities:
+				</label>
+				<select name="activities" onChange={handleInput}>
+					<option>{getActivities}</option>
+				</select>
+				<br></br>
+				<button
+					style={{ marginTop: '3px', padding: '3px' }}
+					type="submit"
+				>
+					Save Edit
 				</button>
+				<Link to="/myroutines">
+					<button
+						style={{ marginTop: '3px', padding: '3px' }}
+						type="button"
+						id="myroutines"
+					>
+						Cancel
+					</button>
+				</Link>
 			</form>
 		</div>
 	);

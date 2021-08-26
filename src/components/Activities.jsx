@@ -52,7 +52,7 @@ const Activities = ({ activities, setActivities, user }) => {
 							required
 							name="description"
 							value={form.description}
-							onInput={handleInput}
+							onChange={handleInput}
 						/>
 						<button type="submit">Create</button>
 					</form>
