@@ -8,28 +8,13 @@
 }
 
 body {
+	display: grid;
 	height: 100vh;
 	font-weight: 100;
 	font-size: large;
 	background-image: linear-gradient(45deg, #861f41 0%, #c64600 100%);
 }
 
-#app {
-	height: 100%;
-}
-
-.app {
-	display: grid;
-	grid-template-columns: 320px 1fr;
-	grid-template-rows: auto auto 1fr;
-	grid-gap: 8px;
-	font-weight: 100;
-	font-size: large;
-	height: 100%;
-	width: 100%;
-	overflow: hidden;
-	background-image: linear-gradient(45deg, #861f41 0%, #c64600 100%);
-}
 
 button,
 form {
@@ -38,6 +23,14 @@ form {
 
 a {
 	margin: 3px;
+}
+
+.editRoutine {
+	border: 2px dotted black;
+}
+
+.addActivity {
+	border: 2px dotted black;
 }
 
 .routineCard {

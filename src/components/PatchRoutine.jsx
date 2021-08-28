@@ -1,21 +1,24 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-import { getActivities, patchRoutine } from '../api';
+import { patchRoutine } from '../api';
 
-const PatchRoutine = ({ routines, activities }) => {
+const PatchRoutine = ({ setEdit, id, name, goal }) => {
 	const [form, setForm] = useState({
-		isPublic: '',
+		isPublic: 'true',
 		name: '',
 		goal: '',
 	});
 
-	const {rootName, rootGoal } = routines;
-
-	console.log('patch routines', routines);
-	console.log('patch activities', activities);
-
 	const formReset = () => {
-		setForm({ isPublic: '', name: '', goal: '' });
+		setForm({ isPublic: 'true', name: '', goal: '' });
+	};
+
+	const handleCancel = async (e) => {
+		e.preventDefault();
+		try {
+			setEdit('inactive');
+		} catch (error) {
+			throw error;
+		}
 	};
 
 	const handleInput = (e) => {
@@ -23,11 +26,12 @@ const PatchRoutine = ({ routines, activities }) => {
 	};
 
 	const handlePatch = async (e) => {
-		try {
-			await patchRoutine(e.target.id);
-			alert('Routine updated successfully');
-			setRoutines(routines);
+		e.preventDefault();
 
+		try {
+			await patchRoutine(e.target.id, form.name, form.goal);
+
+			alert('Routine updated successfully');
 			formReset();
 			window.location.assign('/myroutines');
 		} catch (error) {
@@ -36,17 +40,18 @@ const PatchRoutine = ({ routines, activities }) => {
 	};
 
 	return (
-		<div>
-			<h1>Edit Routine</h1>
+		<div className='editRoutine'>
+			<h3>Edit Routine</h3>
 
-			<form onSubmit={handlePatch}>
+			<form onSubmit={handlePatch} id={id}>
 				<label style={{ marginTop: '3px', padding: '3px' }}>
 					Name:
 				</label>
 				<input
 					style={{ marginTop: '3px', padding: '3px' }}
-					name='name'
+					name="name"
 					required
+					placeholder={name}
 					value={form.name}
 					onChange={handleInput}
 				/>
@@ -58,32 +63,26 @@ const PatchRoutine = ({ routines, activities }) => {
 					style={{ marginTop: '3px', padding: '3px' }}
 					required
 					name="goal"
+					placeholder={goal}
 					value={form.goal}
 					onChange={handleInput}
 				/>
 				<br></br>
-				<label style={{ marginTop: '3px', padding: '3px' }}>
-					Activities:
-				</label>
-				<select name="activities" onChange={handleInput}>
-					<option>{getActivities}</option>
-				</select>
-				<br></br>
 				<button
 					style={{ marginTop: '3px', padding: '3px' }}
 					type="submit"
+					id="submit"
 				>
 					Save Edit
 				</button>
-				<Link to="/myroutines">
-					<button
-						style={{ marginTop: '3px', padding: '3px' }}
-						type="button"
-						id="myroutines"
-					>
-						Cancel
-					</button>
-				</Link>
+				<button
+					style={{ marginTop: '3px', padding: '3px' }}
+					onClick={handleCancel}
+					type="button"
+					id="cancel"
+				>
+					Cancel
+				</button>
 			</form>
 		</div>
 	);

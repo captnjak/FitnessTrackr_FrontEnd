@@ -61,7 +61,7 @@ const CreateRoutine = ({ setRoutines }) => {
 					required
 					name="name"
 					value={form.name}
-					onInput={handleInput}
+					onChange={handleInput}
 				/>{' '}
 				<br></br>
 				<label style={{ marginTop: '3px', padding: '3px' }}>
@@ -72,7 +72,7 @@ const CreateRoutine = ({ setRoutines }) => {
 					required
 					name="goal"
 					value={form.goal}
-					onInput={handleInput}
+					onChange={handleInput}
 				/>{' '}
 				<br></br>
 				<button

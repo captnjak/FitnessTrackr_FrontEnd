@@ -30,7 +30,7 @@ const App = () => {
 
 	return (
 		<BrowserRouter>
-			<div id="App">
+			<div>
 				<Header setUser={setUser} user={user} />
 
 				<Switch>
@@ -39,7 +39,7 @@ const App = () => {
 						<Routines routines={routines} />
 					</Route>
 					<Route path="/myroutines">
-						<MyRoutines routines={routines} user={user} setRoutines={setRoutines} />
+						<MyRoutines routines={routines} user={user} setRoutines={setRoutines} activities={activities}/>
 					</Route>
 					<Route path="/activities">
 						<Activities activities={activities} user={user} setActivities={setActivities} />
@@ -47,9 +47,9 @@ const App = () => {
                     <Route path="/createroutine">
 						<CreateRoutine user={user} setRoutines={setRoutines} />
 					</Route>
-					<Route path="/patchroutine">
-						<PatchRoutine routines={routines} activities={activities}/>
-					</Route>
+					{/* <Route path="/patchroutine">
+						<PatchRoutine routines={routines} setRoutines={setRoutines}/>
+					</Route> */}
 				</Switch>
 			</div>
 		</BrowserRouter>
