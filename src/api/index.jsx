@@ -67,10 +67,10 @@ export async function patchRoutine(id, name, goal) {
 	}
 }
 
-export async function createRootAct(routineID, count, duration) {
+export async function createRootAct(id, count, duration) {
 	try {
 		const { data } = await axios.post(
-			`${BASE_URL}/routines/${routineID}/activities`,
+			`${BASE_URL}/routines/${id}/activities`,
 			{
 				count: count,
 				duration: duration,
@@ -87,10 +87,10 @@ export async function createRootAct(routineID, count, duration) {
 	} catch (error) {}
 }
 
-export async function patchRootAct(routineActivityID, count, duration) {
+export async function patchRootAct(id, count, duration) {
 	try {
 		const { data } = await axios.patch(
-			`${BASE_URL}/routine_activities/${routineActivityID}`,
+			`${BASE_URL}/routine_activities/${id}`,
 			{
 				count: count,
 				duration: duration,
@@ -107,10 +107,10 @@ export async function patchRootAct(routineActivityID, count, duration) {
 	} catch (error) {}
 }
 
-export async function destroyRootAct(routineActivityID) {
+export async function destroyRootAct(id) {
 	try {
 		const { data } = await axios.delete(
-			`${BASE_URL}/routine_activities/${routineActivityID}`,
+			`${BASE_URL}/routine_activities/${id}`,
 			{
 				count: count,
 				duration: duration,

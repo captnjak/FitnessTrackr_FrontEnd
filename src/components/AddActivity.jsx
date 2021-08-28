@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { createRootAct, patchRootAct } from '../api';
 
-const AddActivity = ({ setAct, routines, activities, id }) => {
+const AddActivity = ({ setAct, activitiesDupe, id }) => {
 	const [form, setForm] = useState({
 		count: '',
 		duration: '',
@@ -21,10 +21,11 @@ const AddActivity = ({ setAct, routines, activities, id }) => {
 		setForm({ count: '', duration: '' });
 	};
 	const handleInput = (e) => {
-		setForm({ ...form, [e.target.count]: e.target.duration });
+		setForm({ ...form, [e.target.name]: e.target.value });
 	};
 
-	const handlePatch = async (e) => {
+	const handleSubmit = async (e) => {
+		
 		try {
 			await createRootAct(e.target.id, form.count, form.duration);
 			
@@ -40,16 +41,16 @@ const AddActivity = ({ setAct, routines, activities, id }) => {
 		<div className='addActivity'>
 			<h4>Add Activity</h4>
 
-			<form onSubmit={handlePatch}>
+			<form onSubmit={handleSubmit} id={id}>
 				<br></br>
 					<label style={{ marginTop: '3px', padding: '3px' }}>
 						Activities:
 					</label>
 					<select name="activities" onChange={handleInput}>
 						<option value="">No Activity</option>
-						{activities.map((activity) => {
+						{activitiesDupe.map((activity) => {
 							return (
-								<option key={activity.id}>
+								<option key={activity.id} value={activity.id}>
 									{activity.name}
 								</option>
 							);
@@ -60,28 +61,30 @@ const AddActivity = ({ setAct, routines, activities, id }) => {
 					Count:
 				</label>
 				<input
+					placeholder='Count'
 					style={{ marginTop: '3px', padding: '3px' }}
-					name="count"
 					required
+					name="count"
 					value={form.count}
-					onChange={handleInput}
+					onInput={handleInput}
 				/>
 				<br></br>
 				<label style={{ marginTop: '3px', padding: '3px' }}>
 					Duration:
 				</label>
 				<input
+					placeholder='Duration'
 					style={{ marginTop: '3px', padding: '3px' }}
 					required
 					name="duration"
 					value={form.duration}
-					onChange={handleInput}
+					onInput={handleInput}
 				/>
 				<button
 					style={{ marginTop: '3px', padding: '3px' }}
 					type="submit"
 				>
-					Save Edit
+					Add Activity
 				</button>
 					<button
 						style={{ marginTop: '3px', padding: '3px' }}

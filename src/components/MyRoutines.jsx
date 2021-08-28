@@ -7,6 +7,7 @@ import PatchRoutine from './PatchRoutine';
 const myRoutines = ({ user, routines, setRoutines, activities }) => {
 	const [edit, setEdit] = useState('inactive');
 	const [act, setAct] = useState('inactive');
+	const activitiesDupe = activities;
 
 	const handleDelete = async (e) => {
 		try {
@@ -82,7 +83,7 @@ const myRoutines = ({ user, routines, setRoutines, activities }) => {
 							{act === 'active' && (
 								<AddActivity
 									routines={routines}
-									activities={activities}
+									activitiesDupe={activitiesDupe}
 									setAct={setAct}
 									act={act}
 									id={id}
