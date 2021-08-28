@@ -1,0 +1,65 @@
+@import url('https://fonts.googleapis.com/css?family=Parisienne|Roboto|Playfair+Display|Roboto+Condensed&display=swap');
+
+* {
+	border: 0;
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+body {
+	display: grid;
+	height: 100vh;
+	font-weight: 100;
+	font-size: large;
+	background-image: linear-gradient(45deg, #861f41 0%, #c64600 100%);
+}
+
+
+button,
+form {
+	margin: 5px;
+}
+
+a {
+	margin: 3px;
+}
+
+.editRoutine {
+	border: 2px dotted black;
+}
+
+.addActivity {
+	border: 2px dotted black;
+}
+
+.routineCard {
+	border: 2px solid black;
+	width: 800px;
+	padding: 5px;
+	margin: 5px;
+}
+
+.activityCard {
+	border: 2px solid black;
+	width: 500px;
+	padding: 5px;
+	margin: 5px;
+}
+
+header {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+	font-family: 'Balsamic Sans', sans-serif;
+	font-size: 16px;
+	padding: 1em;
+}
+
+header h1 {
+	font-size: 2.4em;
+	font-style: italic;
+	color: gray;
+	text-shadow: 1px 1px 3px black;
+}
